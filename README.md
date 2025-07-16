@@ -58,6 +58,38 @@ print(f"Current device: {torch.device('mps' if torch.backends.mps.is_available()
 - **Architecture**: Decoupled Attention Network (DAN)
 - **Output**: Character-level predictions for text recognition
 
+## 📊 Dataset
+
+This implementation uses the **Products-Real** dataset from the [ExpDate repository](https://felizang.github.io/expdate/). The dataset contains real-world product images with expiration date annotations.
+
+### Dataset Structure
+The Products-Real dataset includes:
+- **Real product images** with various expiration date formats
+- **Bounding box annotations** for date regions
+- **Character-level annotations** for text recognition
+- **Multiple date formats** (DD/MM/YYYY, MM/DD/YYYY, etc.)
+
+### Dataset Organization
+```
+data/
+├── Products-Real/
+│   ├── train/
+│   │   ├── images/          # Training images
+│   │   └── annotations.json # Training annotations
+│   ├── val/
+│   │   ├── images/          # Validation images  
+│   │   └── annotations.json # Validation annotations
+│   └── test/
+│       ├── images/          # Test images
+│       └── annotations.json # Test annotations
+```
+
+### Data Format
+The annotations follow the COCO format with additional fields for:
+- **Date detection**: Bounding boxes for date regions
+- **DMY detection**: Separate bounding boxes for day, month, year components
+- **Text recognition**: Character-level annotations for OCR training
+
 ## 🚀 Quick Start
 
 ### Demo
@@ -159,12 +191,16 @@ ExpDate/
 ├── requirements.txt          # Dependencies
 ├── README.md                 # This file
 └── data/                     # Dataset directory
-    ├── train/
-    │   ├── images/
-    │   └── annotations.json
-    └── evaluation/
-        ├── images/
-        └── annotations.json
+    └── Products-Real/        # Products-Real dataset
+        ├── train/
+        │   ├── images/
+        │   └── annotations.json
+        ├── val/
+        │   ├── images/
+        │   └── annotations.json
+        └── test/
+            ├── images/
+            └── annotations.json
 ```
 
 ## 🎯 Usage Examples
@@ -182,13 +218,29 @@ result = pipeline("milk.jpg")
 print(f"Expiration date: {result}")
 ```
 
-### Training with Custom Data
+### Training with Products-Real Dataset
 ```python
 from data import build_dataloader
 from date_detector_train import train_date_detector
 from date_detector import DateDetector
 
-# Create dataset
+# Create dataset using Products-Real
+dataloader = build_dataloader(root="data/Products-Real", batch_size=4)
+
+# Initialize model
+model = DateDetector()
+
+# Train
+history = train_date_detector(model, dataloader, num_epochs=12)
+```
+
+### Using Custom Data
+```python
+from data import build_dataloader
+from date_detector_train import train_date_detector
+from date_detector import DateDetector
+
+# Create dataset with custom data
 dataloader = build_dataloader(root="your_data_path", batch_size=4)
 
 # Initialize model
@@ -265,6 +317,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## 🙏 Acknowledgments
 
 - Original paper: "A generalized framework for recognition of expiration dates using fully convolutional networks"
+- [ExpDate repository](https://felizang.github.io/expdate/) for the Products-Real dataset
 - PyTorch team for MPS support
 - Apple for Metal Performance Shaders
 
