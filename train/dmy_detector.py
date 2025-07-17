@@ -2,12 +2,12 @@
 import torch
 import torch.nn as nn
 from torchvision.models import resnet50, ResNet50_Weights
-from mps_utils import model_to_device, to_device, DEVICE, DTYPE
+from utils.mps_utils import model_to_device, to_device, DEVICE, DTYPE
 
 class DMYHead(nn.Module):
     def __init__(self, in_channels=512):
         super().__init__()
-        self.cls = nn.Conv2d(in_channels, 3, 3, padding=1)   # day, month, year
+        self.cls = nn.Conv2d(in_channels, 4, 3, padding=1)   # date, due, prod, code
         self.reg = nn.Conv2d(in_channels, 4, 3, padding=1)
         self.ctn = nn.Conv2d(in_channels, 1, 3, padding=1)
 

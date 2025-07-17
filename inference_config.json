@@ -1,0 +1,105 @@
+{
+  "data": {
+    "train_data_path": "data/train",
+    "eval_data_path": "data/evaluation",
+    "annotations_file": "annotations.json",
+    "images_dir": "images",
+    "image_size": [
+      800,
+      1333
+    ],
+    "normalize_mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "normalize_std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "random_horizontal_flip_p": 0.5,
+    "random_rotation_degrees": 10,
+    "color_jitter_brightness": 0.2,
+    "color_jitter_contrast": 0.2,
+    "batch_size": 8,
+    "num_workers": 0,
+    "shuffle": true,
+    "pin_memory": false,
+    "dummy_num_samples": 100
+  },
+  "model": {
+    "date_detector_checkpoint": "date_detector_mps.pth",
+    "dmy_detector_checkpoint": "dmy_detector_mps.pth",
+    "dan_recognizer_checkpoint": "dan_recognizer_mps.pth",
+    "date_detector_backbone": "resnet50",
+    "date_detector_fpn_channels": 256,
+    "date_detector_num_classes": 4,
+    "dmy_detector_backbone": "resnet18",
+    "dmy_detector_fpn_channels": 128,
+    "dmy_detector_num_classes": 3,
+    "dan_recognizer_backbone": "resnet18",
+    "dan_recognizer_hidden_size": 256,
+    "dan_recognizer_num_layers": 2,
+    "dan_recognizer_dropout": 0.1,
+    "vocab": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ-",
+    "vocab_size": 38,
+    "max_text_length": 20
+  },
+  "training": {
+    "num_epochs": 15,
+    "learning_rate": 0.0001,
+    "weight_decay": 1e-05,
+    "momentum": 0.9,
+    "scheduler_step_size": 5,
+    "scheduler_gamma": 0.5,
+    "cls_loss_weight": 1.0,
+    "reg_loss_weight": 1.0,
+    "ctr_loss_weight": 1.0,
+    "save_every_n_epochs": 5,
+    "save_best_model": false,
+    "early_stopping_patience": 10,
+    "validation_frequency": 1,
+    "validation_split": 0.2
+  },
+  "device": {
+    "device": "mps",
+    "dtype": "float32",
+    "clear_memory_frequency": 1,
+    "max_memory_usage": 8.0,
+    "use_mixed_precision": true,
+    "amp_dtype": "float16"
+  },
+  "inference": {
+    "date_detection_threshold": 0.7,
+    "dmy_detection_threshold": 0.7,
+    "text_recognition_threshold": 0.7,
+    "nms_threshold": 0.5,
+    "max_detections": 100,
+    "min_box_size": 10,
+    "max_box_size": 1000,
+    "output_format": "DD/MM/YYYY",
+    "return_confidence": true,
+    "return_bbox": false
+  },
+  "logging": {
+    "log_level": "INFO",
+    "log_file": "expdate_training.log",
+    "tensorboard_log_dir": "logs",
+    "print_every_n_batches": 10,
+    "save_training_plots": false,
+    "plot_save_dir": "plots",
+    "track_metrics": [
+      "loss",
+      "accuracy",
+      "precision",
+      "recall"
+    ]
+  },
+  "paths": {
+    "project_root": ".",
+    "models_dir": "models",
+    "checkpoints_dir": "checkpoints",
+    "results_dir": "results"
+  }
+}

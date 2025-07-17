@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torch.nn import TransformerEncoder, TransformerEncoderLayer
 from torchvision.models import resnet50, ResNet50_Weights
-from mps_utils import model_to_device, to_device, DEVICE, DTYPE
+from utils.mps_utils import model_to_device, to_device, DEVICE, DTYPE
 
 class DAN(nn.Module):
     """

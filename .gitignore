@@ -159,9 +159,9 @@ data/
 *.mov
 
 # Configuration files with sensitive data
-config.json
-inference_config.json
-training_config.json
+# config.json
+# inference_config.json
+# training_config.json
 
 # IDE specific files
 .vscode/

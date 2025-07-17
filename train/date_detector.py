@@ -3,7 +3,7 @@ import torch
 import torch.nn as nn
 from torchvision.models import resnet50, ResNet50_Weights
 from torchvision.ops import FeaturePyramidNetwork
-from mps_utils import model_to_device, to_device, DEVICE, DTYPE
+from utils.mps_utils import model_to_device, to_device, DEVICE, DTYPE
 
 # Fallback FPN implementation if mmdet is not available
 class SimpleFPN(nn.Module):

@@ -8,7 +8,7 @@ import numpy as np
 from PIL import Image
 import torchvision.transforms as T
 from typing import Dict, List, Tuple, Optional
-from mps_utils import to_device, DEVICE, DTYPE
+from utils.mps_utils import to_device, DEVICE, DTYPE
 
 def custom_collate_fn(batch):
     """

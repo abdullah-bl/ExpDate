@@ -6,9 +6,9 @@ from torch.utils.data import DataLoader
 import time
 from typing import Dict, Any
 
-from date_detector import DateDetector
-from data import build_dataloader
-from mps_utils import (
+from train.date_detector import DateDetector
+from train.data import build_dataloader
+from utils.mps_utils import (
     model_to_device, to_device, create_optimizer, create_scheduler,
     MixedPrecisionTrainer, clear_memory, get_memory_info, DEVICE, DTYPE
 )
@@ -193,11 +193,11 @@ def main():
         print("Creating dummy data loader for demonstration...")
         
         # Create dummy data loader for demonstration
-        from data import create_dummy_dataloader
+        from train.data import create_dummy_dataloader
         dataloader = create_dummy_dataloader(batch_size=4)
     
-    # Train the model
-    history = train_date_detector(model, dataloader)
+    # Train the model for 1 epoch
+    history = train_date_detector(model, dataloader, num_epochs=1)
     
     # Print final statistics
     print("\nTraining Statistics:")

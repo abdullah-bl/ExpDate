@@ -19,16 +19,16 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from pipeline import ExpDatePipeline
-from mps_utils import DEVICE, DTYPE, get_memory_info, clear_memory
+from utils.mps_utils import DEVICE, DTYPE, get_memory_info, clear_memory
 
 def create_dummy_checkpoints():
     """Create dummy checkpoint files for demonstration"""
     print("Creating dummy checkpoint files...")
     
     # Create dummy models and save them
-    from date_detector import DateDetector
-    from dmy_detector import DMYDetector
-    from dan_recognizer import DAN
+    from train.date_detector import DateDetector
+    from train.dmy_detector import DMYDetector
+    from train.dan_recognizer import DAN
     
     # Date detector
     date_model = DateDetector()
@@ -244,9 +244,9 @@ def show_system_info():
     print(f"Current memory usage: {memory_info['allocated']:.2f}GB allocated")
     
     # Model information
-    from date_detector import DateDetector
-    from dmy_detector import DMYDetector
-    from dan_recognizer import DAN
+    from train.date_detector import DateDetector
+    from train.dmy_detector import DMYDetector
+    from train.dan_recognizer import DAN
     
     date_model = DateDetector()
     dmy_model = DMYDetector()

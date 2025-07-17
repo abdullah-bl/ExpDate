@@ -6,10 +6,10 @@ from PIL import Image
 import numpy as np
 from typing import Dict, List, Tuple, Optional
 
-from date_detector import DateDetector
-from dmy_detector import DMYDetector
-from dan_recognizer import DAN
-from mps_utils import to_device, DEVICE, DTYPE, clear_memory
+from train.date_detector import DateDetector
+from train.dmy_detector import DMYDetector
+from train.dan_recognizer import DAN
+from utils.mps_utils import to_device, DEVICE, DTYPE, clear_memory
 
 class ExpDatePipeline:
     def __init__(self, ckpt_detect: str, ckpt_dmy: str, ckpt_rec: str):

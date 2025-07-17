@@ -53,10 +53,10 @@ def test_model_loading():
     
     try:
         # Import models
-        from date_detector import DateDetector
-        from dmy_detector import DMYDetector
-        from dan_recognizer import DAN
-        from mps_utils import DEVICE, DTYPE
+        from train.date_detector import DateDetector
+        from train.dmy_detector import DMYDetector
+        from train.dan_recognizer import DAN
+        from utils.mps_utils import DEVICE, DTYPE
         
         print(f"Current device: {DEVICE}")
         print(f"Current dtype: {DTYPE}")
@@ -149,7 +149,7 @@ def test_memory_management():
     print("=" * 60)
     
     try:
-        from mps_utils import get_memory_info, clear_memory
+        from utils.mps_utils import get_memory_info, clear_memory
         
         # Get initial memory info
         initial_memory = get_memory_info()
@@ -187,7 +187,7 @@ def test_data_loading():
     print("=" * 60)
     
     try:
-        from data import create_dummy_dataloader
+        from train.data import create_dummy_dataloader
         
         # Create dummy dataloader
         dataloader = create_dummy_dataloader(batch_size=2, num_samples=4)

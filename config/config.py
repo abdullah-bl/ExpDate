@@ -15,9 +15,9 @@ class DataConfig:
     
     # Data paths
     train_data_path: str = "data/train"
-    eval_data_path: str = "data/evaluation"
-    annotations_file: str = "annotations.json"
-    images_dir: str = "images"
+    eval_data_path: str = ".data/evaluation"
+    annotations_file: str = "data/annotations.json"
+    images_dir: str = "data/images"
     
     # Image preprocessing
     image_size: Tuple[int, int] = (800, 1333)
